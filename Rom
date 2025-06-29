@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ilé Ifá Ayé Tuntun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Inter', sans-serif; background: #f5f1e6; color: #2e1a0f;
+      line-height: 1.5;
+    }
+    header {
+      background: #7a4e2f; color: white; padding: 1.5rem 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+    nav {
+      display: flex; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white; text-decoration: none; font-weight: 600;
+      padding: 0.5rem 1rem; border-radius: 8px; background: #5e3c2c;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover, nav a:focus {
+      background: #3d261b;
+      outline: none;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+    .menu-toggle div {
+      width: 25px; height: 3px;
+      background: white;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+      nav.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+    main {
+      max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .highlight {
+      background: #fffbe6;
+      padding: 1rem;
+      border-left: 5px solid #e8b057;
+      font-style: italic;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      background: #2e1a0f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .lang-switch {
+      background: #5e3c2c;
+      border: none;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 1rem;
+    }
+    form {
+      background: #fffbe6;
+      padding: 1rem;
+      border-left: 5px solid #e8b057;
+      max-width: 500px;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    button.submit-btn, button.auth-btn {
+      background: #7a4e2f;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover, button.auth-btn:hover {
+      background: #5e3c2c;
+    }
+    .error {
+      color: #b00020;
+      font-size: 0.9rem;
+      margin-top: -0.7rem;
+      margin-bottom: 1rem;
+    }
+    .success-msg {
+      color: green;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+    .payment-btn {
+      display: inline-block;
+      background:#7a4e2f;
+      color:#fff;
+      padding:12px 24px;
+      border-radius:8px;
+      font-weight:700;
+      text-decoration:none;
+      margin-top: 0.5rem;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .payment-btn:hover {
+      background:#5e3c2c;
+    }
+    .whatsapp-btn {
+      background:#25D366;
+      color:#fff;
+      padding:12px 20px;
+      border-radius:8px;
+      font-weight:700;
+      text-decoration:none;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    .testimony {
+      background: #fffbe6;
+      border-left: 5px solid #e8b057;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .blog-article {
+      border-bottom: 1px solid #e8b057;
+      margin-bottom: 1rem;
+      padding-bottom: 0.7rem;
+    }
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+    .faq-question {
+      font-weight: 700;
+      cursor: pointer;
+      color: #7a4e2f;
+      margin-bottom: 0.3rem;
+    }
+    .faq-answer {
+      display: none;
+      padding-left: 1rem;
+    }
+    .faq-question.active + .faq-answer {
+      display: block;
+    }
+    .action-btn {
+      background:#e8b057;
+      color:#2e1a0f;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      border:none;
+      margin-top: 1rem;
+      display: inline-block;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ilé Ifá Ayé Tuntun</h1>
+    <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+      <div></div><div></div><div></div>
+    </button>
+    <nav id="primary-navigation" role="navigation" aria-label="Menu principal">
+      <a href="#accueil">Accueil</a>
+      <a href="#odu-jour">Odù du Jour</a>
+      <a href="#cours">Cours</a>
+      <a href="#fondateur">Fondateur</a>
+      <a href="#consultation">Consultation</a>
+      <a href="#inscription">Inscription</a>
+      <a href="#espace-membre">Espace Membre</a>
+      <a href="#ebook">E-book</a>
+      <a href="#paiement">Paiement</a>
+      <a href="#temoignages">Témoignages</a>
+      <a href="#blog">Blog</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="lang-switch" aria-label="Changer la langue">FR</button>
+  </header>
+
+  <main>
+    <section id="accueil" tabindex="-1">
+      <h2>Bienvenue</h2>
+      <p class="highlight">“Ifá fun gbogbo ènìyàn. Àṣẹ fun gbogbo Ayé.”</p>
+      <p>Notre école est un pont entre la sagesse ancestrale yorùbá et les générations modernes. Rejoins-nous pour apprendre, pratiquer, et transmettre la lumière d'Orunmila.</p>
+      <a href="#inscription" class="action-btn">Devenir élève maintenant</a>
+    </section>
+
+    <section id="odu-jour" tabindex="-1">
+      <h2>Odù Ifá du Jour</h2>
+      <div id="oduMessage" class="highlight">Chargement de l'Odù du jour...</div>
+    </section>
+
+    <section id="cours" tabindex="-1">
+      <h2>Nos Cours</h2>
+      <ul>
+        <li><strong>Niveau 1 :</strong> Introduction à Ifá – Fondations spirituelles</li>
+        <li><strong>Niveau 2 :</strong> Étude approfondie des Odù Mẹ́jì</li>
+        <li><strong>Niveau 3 :</strong> Pratiques, rituels, Ẹbọ et divination</li>
+        <li><strong>Niveau 4 :</strong> Maîtrise d’Ifá et transmission intergénérationnelle</li>
+      </ul>
+      <p>Les cours sont disponibles en yorùbá, français, anglais et espagnol. Chaque niveau inclut des supports PDF, audio, et vidéo.</p>
+      <a href="#inscription" class="action-btn">Inscris-toi dès maintenant</a>
+    </section>
+
+    <section id="fondateur" tabindex="-1">
+      <h2>Le Fondateur</h2>
+      <p>Roméo Prince OGOUDELE, initié d’Ifá, ingénieur, écrivain et enseignant spirituel. Il dédie sa vie à transmettre la sagesse yorùbá au monde entier à travers une pédagogie moderne, enracinée et multilingue. Il est également le créateur de contenus sur TikTok et Telegram autour d’Ifá.</p>
+      <p><strong>Contact :</strong> <a href="mailto:ogoudeleprince@gmail.com">ogoudeleprince@gmail.com</a></p>
+    </section>
+
+    <section id="consultation" tabindex="-1">
+      <h2>Consultation Ifá</h2>
+      <p>Envie d'une guidance spirituelle personnalisée ? Réserve ta consultation Ifá :</p>
+      <ul>
+        <li>Lecture d’Odù</li>
+        <li>Conseils d’Ẹbọ</li>
+        <li>Alignement d’Orí</li>
+      </ul>
+      <p><strong>WhatsApp :</strong> <a href="https://wa.me/2348146233396" target="_blank" rel="noopener noreferrer">+2348146233396</a></p>
+      <p><strong>Email :</strong> <a href="mailto:ogoudeleprince@gmail.com">ogoudeleprince@gmail.com</a></p>
+      <a href="#paiement" class="action-btn">Payer la consultation</a>
+    </section>
+
+    <section id="inscription" tabindex="-1">
+      <h2>Rejoindre l’école</h2>
+      <form id="inscriptionForm" novalidate>
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" name="nom" required />
+        <div class="error" id="nomError"></div>
+
+        <label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" name="prenom" required />
+        <div class="error" id="prenomError"></div>
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required />
+        <div class="error" id="emailError"></div>
+
+        <label for="telephone">Téléphone *</label>
+        <input type="tel" id="telephone" name="telephone" required pattern="^\+?\d{7,15}$" placeholder="+229xxxxxxxx" />
+        <div class="error" id="telephoneError"></div>
+
+        <button type="submit" class="submit-btn">S’inscrire</button>
+      </form>
+      <div id="inscriptionSuccess" class="success-msg" style="display:none;">Inscription réussie ! Merci de ta confiance.</div>
+
+      <p>📄 <a href="#" id="ficheInscription">Télécharger la fiche d’inscription</a></p>
+      <p>💬 <a href="https://t.me/+kkUyyLOAXbplOGVk" target="_blank" rel="noopener noreferrer">Rejoindre le groupe Telegram</a></p>
+
+      <h3>Paiement</h3>
+      <a href="https://flutterwave.com/pay/ifa-ayetuntun" target="_blank" class="payment-btn">
+        🔐 Payer en ligne (Flutterwave)
+      </a>
+      <a href="https://wa.me/22956723086" target="_blank" class="whatsapp-btn">
+        💬 Payer sur WhatsApp (+229 56 72 30 86)
+      </a>
+    </section>
+
+    <section id="espace-membre" tabindex="-1">
+      <h2>Espace Membre</h2>
+      <p>Connecte-toi ou inscris-toi pour accéder aux cours exclusifs.</p>
+
+      <form id="authForm">
+        <input type="email" id="authEmail" placeholder="Email" required/>
+        <input type="password" id="authPassword" placeholder="Mot de passe" required minlength="6"/>
+        <button type="submit" class="auth-btn">S'inscrire / Se connecter</button>
+      </form>
+      <div id="authMessage" class="success-msg" style="display:none;"></div>
+    </section>
+
+    <section id="ebook" tabindex="-1">
+      <h2>E-book Ifá</h2>
+      <p>📖 Télécharge mon e-book Ifá : <a href="https://example.com/ebook-ifa.pdf" download>Télécharger ici</a></p>
+    </section>
+
+    <section id="paiement" tabindex="-1">
+      <h2>Paiement Mobile Money</h2>
+      <p>Pour régler ta scolarité ou une consultation, utilise l’un des moyens suivants :</p>
+
+      <a href="https://flutterwave.com/pay/ifa-ayetuntun" target="_blank" class="payment-btn">
+        🔐 Payer par Mobile Money (Flutterwave)
+      </a>
+
+      <a href="https://wa.me/22956723086" target="_blank" class="whatsapp-btn">
+        💬 Contacter +229 56 72 30 86 pour payer
+      </a>
+    </section>
+
+    <section id="temoignages" tabindex="-1">
+      <h2>Témoignages</h2>
+      <div class="testimony">
+        « Grâce à Ilé Ifá Ayé Tuntun, j’ai retrouvé la paix intérieure et la force spirituelle dont j’avais besoin. » – Amina D.
+      </div>
+      <div class="testimony">
+        « Les enseignements de Roméo sont profonds, accessibles, et transforment la vie. » – Koffi T.
+      </div>
+      <div class="testimony">
+        « Une école qui allie tradition et modernité avec un respect total des ancêtres. » – Fatou S.
+      </div>
+      <a href="#inscription" class="action-btn">Rejoins-nous toi aussi</a>
+    </section>
+
+    <section id="blog" tabindex="-1">
+      <h2>Enseignements d’Orunmila (Blog)</h2>
+      <article class="blog-article">
+        <h3>Introduction à Ifá : Origines et Significations</h3>
+        <p>Le système Ifá est une sagesse millénaire qui guide les êtres humains à travers les signes d’Orunmila...</p>
+        <a href="#">Lire la suite</a>
+      </article>
+      <article class
